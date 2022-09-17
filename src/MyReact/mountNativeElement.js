@@ -14,15 +14,15 @@ export default function mountNativeElement(virtualDOM, container, oldDOM) {
     container.appendChild(newElement);
   }
 
-  // 判断旧节点是否存在，存在则删除
-  if (oldDOM) {
-    unMountNode(oldDOM);
-  }
 
   // 获取组件的实例对象
   const component = virtualDOM.component;
   // 如果组件实例对象存在
   if (component) {
+    // 判断旧节点是否存在，存在则删除
+    if (oldDOM) {
+      unMountNode(oldDOM);
+    }
     // 将DOM对象存储在类组件实例对象中
     component.setDOM(newElement);
   }

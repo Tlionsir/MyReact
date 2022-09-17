@@ -25,5 +25,9 @@ export default function createDOMElement(virtualDOM) {
     // 并且此时父节点 newElement 就变成了所有子节点的挂载点
     mountElement(child, newElement);
   });
+  // 处理元素节点的ref属性
+  if (virtualDOM.props && virtualDOM.props.ref) {
+    virtualDOM.props.ref(newElement);
+  }
   return newElement;
 }
