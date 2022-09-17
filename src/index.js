@@ -65,12 +65,12 @@ class TestClass extends MyReact.Component {
 
 }
 
-MyReact.render(<TestClass name="张三" age={20}/>, root);
+// MyReact.render(<TestClass name="张三" age={20}/>, root);
 
-setTimeout(() => {
+// setTimeout(() => {
 //   // MyReact.render(<TestClass name="李四" age={100}/>, root);
-  MyReact.render(<HelloWorld title="我是hello world组件" />, root)
-}, 2000);
+//   MyReact.render(<HelloWorld title="我是hello world组件" />, root)
+// }, 2000);
 
 class DemoRef extends MyReact.Component {
   constructor(props) {
@@ -155,4 +155,4 @@ class KeyDemo extends MyReact.Component {
   }
 }
 
-// MyReact.render(<KeyDemo />, root)
+MyReact.render(<KeyDemo />, root)

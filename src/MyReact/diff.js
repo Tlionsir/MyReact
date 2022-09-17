@@ -70,7 +70,8 @@ export default function diff(virtualDOM, container, oldDOM) {
             }
           } else {
             // 新增元素
-            mountElement(child, oldDOM, oldDOM.childNodes[i]);
+            const addElement = true;
+            mountElement(child, oldDOM, oldDOM.childNodes[i], addElement);
           }
         }
       });
