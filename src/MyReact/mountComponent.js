@@ -24,8 +24,17 @@ export default function mountComponent(virtualDOM, container, oldDOM) {
     // 函数类型，递归调用mountComponent
     mountComponent(nextVirtualDOM, container, oldDOM);
   } else {
-    // 非函数类型，直接构建节点
+    // 非函数类型，直接构建节点，生成DOM元素
     mountNativeElement(nextVirtualDOM, container, oldDOM);
+  }
+  // 如果类组件实例存在
+  if (component) {
+    // 调用实例属性中的生命周期函数
+    component.componentDidMount();
+    // 如果组件实例的props属性上有ref属性，则将组件实例传给ref方法
+    if (component.props && component.props.ref) {
+      component.props.ref(component);
+    }
   }
 }
 

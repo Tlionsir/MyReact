@@ -17,6 +17,8 @@ export default function createDOMElement(virtualDOM) {
     // 为元素节点添加/更新属性
     updateNodeElement(newElement, virtualDOM);
   }
+  // 将virtualDOM挂载到element节点上
+  newElement._virtualDOM = virtualDOM;
   // 递归处理所有子节点
   virtualDOM.children.forEach(child => {
     // 因为不确定子元素是 NativeElement 还是Component 所以调用 mountElement 方法进行分类处理

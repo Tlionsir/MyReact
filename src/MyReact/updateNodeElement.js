@@ -22,6 +22,10 @@ export default function updateNodeElement(newElement, virtualDOM, oldVirtualDOM 
           const eventName = propName.toLowerCase()
             .slice(2);
           newElement.addEventListener(eventName, newPropsValue);
+          // 删除原有的事件的事件处理函数
+          if (oldPropsValue) {
+            newElement.removeEventListener(eventName, oldPropsValue);
+          }
         }
         // 2.针对value值和checked需要使用对象属性的方式赋值
         else if (propName === 'value' || propName === 'checked') {

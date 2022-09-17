@@ -22,6 +22,8 @@ const virtualDOM = (
 );
 // MyReact.render(virtualDOM, root);
 
+// console.log(virtualDOM);
+
 // 函数组件的 Virtual DOM
 // {
 //     type: f function() {},
@@ -63,6 +65,95 @@ class TestClass extends MyReact.Component {
 
 }
 
-MyReact.render(<TestClass name="张三" age={20} />, root)
+MyReact.render(<TestClass name="张三" age={20}/>, root);
 
-// console.log(TestClass);
+// setTimeout(() => {
+//   MyReact.render(<TestClass name="李四" age={100}/>, root);
+//   // TinyReact.render(<HelloWorld title="我是hello world组件" />, root)
+// }, 2000);
+
+class DemoRef extends MyReact.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // console.log(this.input.value)
+    console.log(this.input);
+    console.log(this.alert);
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" ref={input => (this.input = input)}/>
+        <button onClick={this.handleClick}>按钮</button>
+        <Alert ref={alert => (this.alert = alert)} name="张三" age={20}/>
+      </div>
+    );
+  }
+}
+
+// MyReact.render(<DemoRef />, root)
+
+class KeyDemo extends MyReact.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      persons: [
+        {
+          id: 1,
+          name: '张三'
+        },
+        {
+          id: 2,
+          name: '李四'
+        },
+        {
+          id: 3,
+          name: '王五'
+        },
+        {
+          id: 4,
+          name: '赵六'
+        }
+      ]
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const newState = JSON.parse(JSON.stringify(this.state));
+    // newState.persons.push(newState.persons.shift())
+    // newState.persons.splice(1, 0, { id: 100, name: "法外狂徒" })
+    newState.persons.pop();
+    this.setState(newState);
+  }
+
+  render() {
+    return (
+      <div>
+        <ul>
+          {this.state.persons.map(person => (
+            <li key={person.id}>
+              {person.name}
+              <DemoRef/>
+            </li>
+          ))}
+        </ul>
+        <button onClick={this.handleClick}>按钮</button>
+      </div>
+    );
+  }
+}
+
+// MyReact.render(<KeyDemo />, root)
